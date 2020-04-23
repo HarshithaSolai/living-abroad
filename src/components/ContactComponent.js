@@ -32,11 +32,8 @@ class LifeStyle extends Component {
                 </dl>
                 <blockquote className="blockquote">
                   <p className="mb-0">
-                    Better to do something imperfectly than to do nothing flawlessly.
+                    I am an Indian (from Bangalore) recently relocated to Amsterdam (Netherlands) accompanying my partner.
                   </p>
-                  <footer className="blockquote-footer">
-                    Robert Schuller
-                  </footer>
                 </blockquote>
               </CardBody>
             </Card>
