@@ -1,38 +1,106 @@
-.App {
-  text-align: center;
+
+/* Header Styles */
+.jumbotron {
+  padding: 5px 30px 5px 30px;
+  margin:0px auto;
+  background-color: white;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.pb-50 {
+  padding-bottom : 50px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
 }
 
-.App-link {
-  color: #61dafb;
+.row > div[class*='col-'] {
+  display: flex;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.row-header{
+  margin:0px auto;
+  padding:0px auto;
+}
+
+.row-content {
+  margin:0px auto;
+  padding: 30px 0px 60px 0px;
+  min-height:400px;
+}
+
+/* Footer Style */
+.footer{
+  background-color: rgb(29, 180, 197);
+  margin:0px auto;
+  padding: 10px 0px 10px 0px;
+  color : white;
+  position: fixed;
+  height: 60px;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer i{
+  background-color: rgb(29, 180, 197);
+  color : white;
+}
+
+.footer li {
+  display : inline;
+  padding-left: 10px;
+}
+
+.footer a {
+  color : white;
+}
+
+/* Common Styles */
+
+.navbar-dark {
+  background-color: rgb(29, 180, 197);
+}
+
+.currency-block {
+  border : solid 1px rgb(29, 180, 197);
+  height : 400px;
+  width  : 800px;
+  margin: 20px 0px 20px 0px;
+}
+
+.alignCenter {
+  text-align : center;
+}
+
+.contact i, .contact a{
+  color :  rgb(29, 180, 197);
+}
+
+
+.contact li {
+  display : inline;
+  padding-left: 10px;
+}
+
+.progress-block {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.bg-info {
+  background-color: rgb(29, 180, 197);
+}
+
+.score-block {
+  border : 1px rgb(29, 180, 197) solid; 
+}
+
+/* Media Query */
+
+@media (max-width: 600px) {
+  .card-view > div {
+      margin-bottom: 20px;
   }
 }
+
