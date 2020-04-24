@@ -19,11 +19,20 @@ class Qualityscore extends Component {
     };
 
     this.setCities = this.setCities.bind(this);
-    this.handleTypeChange = this.handleTypeChange.bind(this);
     this.getQualityScore = this.getQualityScore.bind(this);
     this.renderDetails = this.renderDetails.bind(this);
     this.renderScores = this.renderScores.bind(this);
+    this.handleTypeChange = this.handleTypeChange.bind(this);    
+  }
 
+  componentDidMount() {
+    //Fecth Cost of living
+    fetch('https://api.teleport.org/api/urban_areas/')
+      .then(res => res.json())
+      .then(res => {
+        this.setCities(res._links['ua:item']);
+      })
+      .catch(error => console.error('Error:', error));
   }
 
   setCities = function(cities) {
@@ -58,10 +67,11 @@ class Qualityscore extends Component {
 
   renderDetails = function(city) {
     if(city) {
-      var details = (city === this.state.srcCity) ? this.state.srcDetails : this.state.tarDetails;
-      var score   = details.teleport_city_score;
-      var summary = details.summary;
-      var scores  = details.categories;
+      var details = (city === this.state.srcCity) ? this.state.srcDetails : this.state.tarDetails,
+          score   = details.teleport_city_score,
+          summary = details.summary,
+          scores  = details.categories;
+          
       return <div>
         {this.renderScores(scores)}
         <span><strong>Quality Score : </strong>{score.toFixed(2)}/100 </span>
@@ -95,20 +105,8 @@ class Qualityscore extends Component {
           tarCity      : value,
           tarDetails   : targetValue
         });
-      });
-      
+      });      
     }
-  }
-
-
-  componentDidMount() {
-    //Fecth Cost of living
-    fetch('https://api.teleport.org/api/urban_areas/')
-      .then(res => res.json())
-      .then(res => {
-        this.setCities(res._links['ua:item']);
-      })
-      .catch(error => console.error('Error:', error));
   }
 
   render() { 
@@ -157,7 +155,6 @@ class Qualityscore extends Component {
       </div>
     );
   }
-
 }
   
 export default withRouter(Qualityscore);

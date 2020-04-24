@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Functional Component
 function Footer() {
   return (
     <div className="footer fixed-bottom">
@@ -14,13 +15,11 @@ function Footer() {
             </ul>
           </div>
           <div class="col-5 col-sm-6 align-self-center">
-            <p>Developed with <i className="fa fa fa-heart"></i> by <a href="https://harshithasv.netlify.com"> <strong>Harshi</strong></a>
-            </p>
+            <p>Developed with <i className="fa fa fa-heart"></i> by <a href="https://harshithasv.netlify.com"> <strong>Harshi</strong></a></p>
           </div>
         </div>
       </div>
     </div>
-
   );
 }
 

@@ -7,10 +7,7 @@ class LifeStyle extends Component {
     super(props);
 
     this.state = {
-      scores     : {},
-      isCitiesLoaded   : false,
       isLoaded : false,
-      isSelected : false,
       cities     : [],
       srcCity    : '',
       tarCity    : '',
@@ -20,10 +17,21 @@ class LifeStyle extends Component {
 
     this.setCities = this.setCities.bind(this);
     this.getLifeStyle = this.getLifeStyle.bind(this);
-    this.renderScores = this.renderScores.bind(this);
+    this.renderTableHeader = this.renderTableHeader.bind(this);
+    this.renderTableData = this.renderTableData.bind(this);
     this.renderNative = this.renderNative.bind(this);
+    this.renderScores = this.renderScores.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
+  }
 
+  componentDidMount() {
+    //Fetch List of cities
+    fetch('https://api.teleport.org/api/urban_areas/')
+    .then(res => res.json())
+    .then(res => {
+      this.setCities(res._links['ua:item']);
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   setCities = function(cities) {
@@ -33,15 +41,13 @@ class LifeStyle extends Component {
   };
 
   getLifeStyle = (cityName) => {
-    //Fecth Cost of living
+    //Fetch Cost of living data
     return fetch(`https://cost-of-living-app.herokuapp.com/${cityName}`)
     .then(res => res.json())
     .then(res => {
-      console.log('Success:', res);
       return res.costs;
     })
     .catch(error => console.error('Error:', error));
-
   };
 
   renderScores = function(scores) {
@@ -53,7 +59,7 @@ class LifeStyle extends Component {
     });
   };
 
-  handleTypeChange(event){
+  handleTypeChange = function(event){
     const target = event.target,
           value = target.value,
           name = target.name;
@@ -61,14 +67,12 @@ class LifeStyle extends Component {
     if(name === 'srcCity') {
       let result = this.getLifeStyle(value);
       result.then((targetValue) => {
-        console.log(targetValue);
         this.setState({
           srcCity  : value,
           srcDetails : targetValue,
           isLoaded : true
         });
       });
-
     } else {
       let result = this.getLifeStyle(value);
       result.then((targetValue) => {
@@ -77,29 +81,20 @@ class LifeStyle extends Component {
           tarDetails   : targetValue,
           isLoaded : true
         });
-      });
-      
+      });      
     }
-  }
+  };
   
-  renderTableHeader() {
+  renderTableHeader = function() {
     if(this.state.isLoaded) {
       let header = ['Item', 'Cost in Current Place', 'Cost in Native Place'];
       return header.map((key, index) => {
         return <th key={index}>{key.toUpperCase()}</th>
       })
     }
-  }
-
-  renderNative = function(i) {
-    if(this.state.tarDetails.length) {
-      return this.state.tarDetails.filter((item, index) => index === i)[0].cost;
-    } else {
-      return '';
-    }
   };
-  
-  renderTableData() {
+
+  renderTableData = function() {
     if(this.state.isLoaded) {
     return this.state.srcDetails.map((criteria, index) => {
        const { item, cost } = criteria; //destructuring
@@ -109,21 +104,19 @@ class LifeStyle extends Component {
             <td>{cost}</td>
             <td>{this.renderNative(index)}</td>
           </tr>
-      )
-    })
-  }
-  }
-  
-  componentDidMount() {
-    //Fetch Cost of living
-    fetch('https://api.teleport.org/api/urban_areas/')
-      .then(res => res.json())
-      .then(res => {
-        this.setCities(res._links['ua:item']);
+        )
       })
-      .catch(error => console.error('Error:', error));
-  }
+    }
+  };
 
+  renderNative = function(i) {
+    if(this.state.tarDetails.length) {
+      return this.state.tarDetails.filter((item, index) => index === i)[0].cost;
+    } else {
+      return '';
+    }
+  };
+  
   render() { 
     const cityList = (this.state.cities).map((city) => {
       return(
@@ -135,7 +128,7 @@ class LifeStyle extends Component {
       <div>
         <div className="row">
           <div className="d-block col-12 col-sm-12 d-flex justify-content-center mt-5">
-            <h3>Compare Cost of Living  </h3> 
+            <h3>Compare Cost of Living</h3> 
           </div>
         </div>
         <div className="row mx-auto form">
@@ -173,7 +166,6 @@ class LifeStyle extends Component {
       </div>
     );
   }
-
 }
   
 export default withRouter(LifeStyle);

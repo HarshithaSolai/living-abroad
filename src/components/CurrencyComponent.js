@@ -4,7 +4,7 @@ import { Form, FormGroup, Label, Input, Col } from 'reactstrap';
 class Currency extends Component {
   constructor(props) {
     super(props);
-
+    //By Default - EUR is set
     this.state = {
       srcCurrencyType  : 'EUR',
       srcCurrency      : 1,
@@ -13,16 +13,35 @@ class Currency extends Component {
       currCodeList     : ['EUR']
     };
   
+    this.setCurrList = this.setCurrList.bind(this);
+    this.setDefault  = this.setDefault.bind(this);
     this.handleTypeChange = this.handleTypeChange.bind(this);
     this.handleAmountChange = this.handleAmountChange.bind(this);
-    this.setCurrList = this.setCurrList.bind(this);
     this.convertCurrency = this.convertCurrency.bind(this);
+  }
+
+  componentDidMount() {
+    //Fetch the Currency Code List
+    fetch(`https://api.exchangeratesapi.io/latest?base=HUF`)
+    .then(res => res.json())
+    .then(res => {
+      this.setCurrList(Object.keys(res.rates));
+    })
+    .catch(error => console.error('Error:', error));
   }
 
   setCurrList = (currCodeList) => {
     this.setState({
       currCodeList : currCodeList
     });
+  };
+
+  setDefault = () => {
+    if(this.props.city && this.props.currency) {
+      return <p>Currency in {this.props.city} is {this.props.currency} </p>
+    } else {
+      return <p></p>
+    }
   };
 
   convertCurrency(srcCode, tarCode, srcValue) {
@@ -36,15 +55,6 @@ class Currency extends Component {
       console.error('Error:', error);
     });
   };
-
-  componentDidMount() {
-    fetch(`https://api.exchangeratesapi.io/latest?base=HUF`)
-    .then(res => res.json())
-    .then(res => {
-      this.setCurrList(Object.keys(res.rates));
-    })
-    .catch(error => console.error('Error:', error));
-  }
 
   handleAmountChange(event) {
     const target = event.target,
@@ -76,6 +86,7 @@ class Currency extends Component {
           name = target.name;
 
     if(name === 'srcCurrencyType') {
+      //If both sorce & target currency types are equal, no conversion required
       if(this.state.tarCurrencyType === value) {
         this.setState({
           srcCurrencyType : value,
@@ -89,9 +100,9 @@ class Currency extends Component {
           srcCurrency     : targetValue
         });
       });
-      }
-      
+      }     
     } else {
+      //If both target & currency types are equal, no conversion required
       if(this.state.srcCurrencyType === value) {
         this.setState({
           tarCurrencyType : value,
@@ -105,8 +116,7 @@ class Currency extends Component {
             tarCurrency     : srcValue
           });
         });
-      }
-      
+      }     
     }
   }
 
@@ -121,12 +131,12 @@ class Currency extends Component {
         <div className="row row-content">
           <div className="d-block col-12 col-sm-12">
             <h3>Currency</h3> 
-            <p>Currency in {this.props.city} is {this.props.currency} </p>
+            {this.setDefault()}
           </div>
           <div className="col-12 col-sm-12">
             <Form>                  
               <FormGroup row>
-                <Label htmlFor="srcCurrency" md={5}> Current Currency </Label>
+                <Label htmlFor="srcCurrency" sm={5}> Current Currency </Label>
                 <Col sm={3}>
                   <Input type="select" name="srcCurrencyType"
                     value={this.state.srcCurrencyType || ''}
@@ -141,7 +151,7 @@ class Currency extends Component {
                 </Col>
               </FormGroup>
               <FormGroup row>
-                <Label htmlFor="tarCurrency" md={5}> Native Currency </Label>
+                <Label htmlFor="tarCurrency" sm={5}> Native Currency </Label>
                 <Col sm={3}>
                   <Input type="select" name="tarCurrencyType"
                     value={this.state.tarCurrencyType || ''}

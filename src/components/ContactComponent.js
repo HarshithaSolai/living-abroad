@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Media, Card, CardBody, CardHeader } from 'reactstrap';
 
-class LifeStyle extends Component {
+class Contact extends Component {
   render() {
     return (
       <div className="container">
@@ -13,7 +13,7 @@ class LifeStyle extends Component {
           <div className="contact col-12 col-sm-6 text-center">
             <Card>
               <CardHeader className="bg-info text-white">
-                Know more about Me
+                Know more about me :
               </CardHeader>
               <CardBody>
                 <dl className="row p-1">
@@ -44,4 +44,4 @@ class LifeStyle extends Component {
   }
 }
 
-export default withRouter(LifeStyle);
+export default withRouter(Contact);
