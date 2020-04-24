@@ -57,7 +57,7 @@ class Main extends Component {
 
   componentDidMount() {
     //Fetch IP Address of the client
-    fetch('http://api.ipify.org/?format=json')
+    fetch('https://api.ipify.org/?format=json')
     .then(res => res.json())
     .then(response => {
       this.setIP(response.ip);
