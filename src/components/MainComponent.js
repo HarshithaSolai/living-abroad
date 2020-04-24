@@ -79,6 +79,7 @@ class Main extends Component {
         <Header />
         <div class="container-fluid">
           <Switch>
+            <Route path="/" component={() => <Home />} exact/>
             <Route path="/home" component={() => <Home />} exact/>
             <Route path="/currency" component={() => <Currency city={this.state.city} currency={this.state.currency} setCurrency={this.state.setCurrency}  />} exact/>
             <Route path="/lifestyle" component={() => <LifeStyle currency={this.state.currency} lifestyle={this.state.lifestyle} city={this.state.city} setLifeStyle={this.state.setLifeStyle}  />} exact/>
