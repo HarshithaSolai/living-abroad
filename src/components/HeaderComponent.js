@@ -23,7 +23,7 @@ class Header extends Component {
     return(
       <Navbar dark expand="sm">
         <div className="container">
-          <NavbarBrand className="mr-auto" href="/"><span className="fa fa-globe fa-lg"></span>   <strong>  Living Abroad</strong></NavbarBrand>
+          <NavbarBrand className="mr-auto" href="/home"><span className="fa fa-globe fa-lg"></span>   <strong>  Living Abroad</strong></NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} />
           <Collapse isOpen={this.state.isNavOpen} navbar>
             <Nav navbar className="ml-auto">
