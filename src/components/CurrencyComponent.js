@@ -30,7 +30,6 @@ class Currency extends Component {
     .then(res => res.json())
     .then(res => {
       let perValue = res.rates[tarCode];
-      console.log(res.rates.tarCode);
       return (perValue * srcValue);
     })
     .catch(error => {

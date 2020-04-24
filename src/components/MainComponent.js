@@ -61,14 +61,34 @@ class Main extends Component {
     .then(res => res.json())
     .then(response => {
       this.setIP(response.ip);
-      //Fetch Details for City, Country, Langitude, Longitude, Currency Code
-      // fetch('https://api.ipdata.co/' + this.state.ipAddress + '?api-key=8738167310cd58214765787bb67ea5df5a66828c008e2366ccd489e1')
-      //   .then(res => res.json())
-      //   .then(res => {
-      //     this.setDetails(res.city, res.country_name, res.latitude, res.longitude, res.currency.code);
-      //     console.log(this.state.city, this.state.currency);
-      //   })
-      //   .catch(error => console.error('Error:', error))
+      if(localStorage.getItem('ipAddress') && localStorage.getItem('ipAddress') === response.ip) {
+        var userDetails = localStorage.getItem('userDetails');
+        this.setDetails(userDetails.city, userDetails.country, userDetails.latitude, userDetails.longitude, userDetails.currency);
+      } else {
+          var url = `https://ipapi.co/${this.state.ipAddress}/json/`;
+          //Fetch Details for City, Country, Langitude, Longitude, Currency Code
+          fetch(url)
+          .then(res => res.json())
+          .then(res => {
+            console.log(res);
+
+            if(!res.message){
+              localStorage.setItem('ipAddress', response.ip);
+            var userDetails = {
+              city    : res.city,
+              country : res.country_name ,
+              latitude : res.latitude, 
+              longitude : res.longitude,
+              currency  :  res.currency
+            };
+            localStorage.setItem('userDetails', userDetails);
+            this.setDetails(res.city, res.country_name, res.latitude, res.longitude, res.currency);
+            }
+            
+          })
+          .catch(error => console.error('Error:', error))
+      }
+      
     })
     .catch(error => console.error('Error:', error))  
   }

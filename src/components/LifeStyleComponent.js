@@ -34,7 +34,7 @@ class LifeStyle extends Component {
 
   getLifeStyle = (cityName) => {
     //Fecth Cost of living
-    return fetch(`http://localhost:3001/${cityName}`)
+    return fetch(`https://cost-of-living-app.herokuapp.com/${cityName}`)
     .then(res => res.json())
     .then(res => {
       console.log('Success:', res);
@@ -115,7 +115,7 @@ class LifeStyle extends Component {
   }
   
   componentDidMount() {
-    //Fecth Cost of living
+    //Fetch Cost of living
     fetch('https://api.teleport.org/api/urban_areas/')
       .then(res => res.json())
       .then(res => {
