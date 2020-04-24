@@ -1,32 +1,33 @@
-This is a simple react application useful for people recently moved to a new place or people living away for their native country.
+# Living Abroad
 
-Starting the Application 
+This is a simple react application useful for people recently moved to a new place or people living away from their native country.
 
-Use the command yarn start
+### Prerequisites
+* Node
+* Yarn or NPM
 
-Public free APIs used in the Application : 
+## Starting the Application 
 
-1. ipify API - Finding the IP Address of the Client 
+```
+yarn start or npm start
+```
 
-URL - https://api.ipify.org/?format=json
-Method - GET
+## Public free APIs used in the Application : 
 
-2. ipapi - Fetching the user information like city, country, currency, geo-locations using IP Address
+1. [ipify API](https://www.ipify.org/) - Finding the IP Address of the Client 
 
-URL - https://ipapi.co/<your-ip-address>/json/
+2. [ipapi](https://ipapi.co/) - Fetching the user information like city, country, currency, geo-locations using IP Address
 
-3. exchangerateAPI - Currency Conversion API 
+3. [exchangerateAPI](https://www.exchangerate-api.com/) - Currency Conversion API 
 
-URL - https://api.exchangeratesapi.io/latest?base=<your-currency-code>
+4. [Sunset and sunrise times API](https://sunrise-sunset.org/) - fetch sunset and sunrise data for a given latitude and longitude.
 
-4. Sunset and sunrise times API - fetch sunset and sunrise data for a given latitude and longitude.
+5. [Cost of Living API](https://github.com/zackharley/cost-of-living-api) - Fetch cost of living data for a city (Forked from Github)
 
-URL - https://api.sunrise-sunset.org/json?lat=<<your-latitude>>&lng=<<your-longitude>>
+Self-Deployed Endpoint - https://cost-of-living-app.herokuapp.com/cityname
 
-5. Teleport - Fetch list of urban cities, quality of life and quality score data. 
+6. [Teleport](https://developers.teleport.org/) - Fetch list of urban cities, quality of life and quality score data. 
 
-6. Cost of Living API - Fetch cost of living data for a city 
+## Deployment
 
-Forked from Github Link : https://github.com/zackharley/cost-of-living-api
-
-URL - https://cost-of-living-app.herokuapp.com/<<cityname>>
+The website is deployed using Netlify. Check the [Live Demo](https://livingabroad.netlify.app) here.
