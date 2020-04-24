@@ -52,7 +52,7 @@ class LifeStyle extends Component {
 
   renderScores = function(scores) {
     return scores.map((item) => {
-      return <div class="progress-block">
+      return <div className="progress-block">
         <div className="text-center">{item.name} </div>
         <Progress animated color="info" value={item.score_out_of_10} max="10">{(item.score_out_of_10).toFixed(2)}/10</Progress>
       </div>

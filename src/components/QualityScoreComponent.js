@@ -57,7 +57,7 @@ class Qualityscore extends Component {
 
   renderScores = function(scores) {
     return scores.map((item) => {
-      return <div class="progress-block">
+      return <div className="progress-block">
         <div className="text-center">{item.name} </div>
         <Progress animated color="info" value={item.score_out_of_10} max="10">{(item.score_out_of_10).toFixed(2)}/10</Progress>
       </div>
@@ -71,7 +71,7 @@ class Qualityscore extends Component {
           score   = details.teleport_city_score,
           summary = details.summary,
           scores  = details.categories;
-          
+
       return <div>
         {this.renderScores(scores)}
         <span><strong>Quality Score : </strong>{score.toFixed(2)}/100 </span>

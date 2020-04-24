@@ -35,6 +35,7 @@ class Main extends Component {
       this.setIP(response.ip);
       if(localStorage.getItem('ipAddress') && localStorage.getItem('ipAddress') === response.ip) {
         var userDetails = localStorage.getItem('userDetails');
+        
         this.setDetails(userDetails.city, userDetails.country, userDetails.latitude, userDetails.longitude, userDetails.currency);
       } else {
         var url = `https://ipapi.co/${this.state.ipAddress}/json/`;
@@ -82,7 +83,7 @@ class Main extends Component {
     return(
       <div>
         <Header />
-        <div class="container-fluid">
+        <div className="container-fluid">
           <Switch>
             <Route path="/" component={() => <Home />} exact/>
             <Route path="/home" component={() => <Home />} exact/>
