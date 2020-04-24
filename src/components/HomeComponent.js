@@ -11,7 +11,7 @@ class Home extends Component {
         <Jumbotron fluid>
           <Row>
             <Col sm={12}>
-              <Media object width="100%" height="auto" src="/assets/images/living.png" alt="Title Image" />
+              <Media object width="100%" height="100%" src="/assets/images/living.png" alt="Title Image" />
             </Col>
           </Row>
         </Jumbotron> 
