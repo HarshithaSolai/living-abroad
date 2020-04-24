@@ -8,10 +8,10 @@ class Home extends Component {
   render() {
     return(
       <div className="pb-50">
-        <Jumbotron fluid>
+        <Jumbotron>
           <Row>
             <Col sm={12}>
-              <Media object width="100%" height="100%" src="/assets/images/living.png" alt="Title Image" />
+              <Media object width="100%" height="auto" src="/assets/images/living.png" alt="Title Image" />
             </Col>
           </Row>
         </Jumbotron> 
